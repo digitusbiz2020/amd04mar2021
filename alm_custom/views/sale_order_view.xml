@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sale_form_inherit" model="ir.ui.view">
+        <field name="name">sale.form.view.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form//page[@name='other_information']/group" position="inside">
+                <group string="Bank Guarantee">
+                    <field name="bank_guarantee_reference"/>
+                    <field name="bank_guarantee_amount"/>
+                    <field name="bank_guarantee_validity"/>
+                    <field name="guarantee_accounting_reference"/>
+                </group>
+                <group string="Insurance">
+                    <field name="insurance_reference"/>
+                    <field name="insurance_amount"/>
+                    <field name="insurance_validity"/>
+                    <field name="insurance_accounting_reference"/>
+                </group>
+                <group string="Tender">
+                    <field name="tender_name"/>
+                    <field name="tender_reference"/>
+                    <field name="tender_date"/>
+                </group>
+            </xpath>
+            <xpath expr="/form/sheet//field[@name='payment_term_id']" position="after">
+                <field name="project_name" readonly="True"/>
+                <field name="project" domain="[('is_template','=',True)]" readonly="True"/>
+                <field name="projects" invisible="1"/>
+            </xpath>
+            <xpath expr="/form/header" position="inside">
+                <button name="create_project_wizard" string="Create Project" type="object" attrs="{'invisible':[('state','!=','sale')]}"/>
+            </xpath>
+            <xpath expr="//button[@name='action_view_invoice']" position="before">
+                    <field name="projects" invisible="1"/>
+                    <button type="object"
+                        name="action_view_projects"
+                        class="oe_stat_button"
+                        icon="fa-puzzle-piece"
+                        attrs="{'invisible':[('state','!=','sale')]}">
+                        <field name="project_count" widget="statinfo" string="Projects" attrs="{'invisible':[('state','!=','sale')]}"/>
+                    </button>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_project_create" model="ir.ui.view">
+        <field name="name">project.create.view.form</field>
+        <field name="model">project.create</field>
+        <field name="arch" type="xml">
+            <form string="Create Project">
+                <group>
+                    <group>
+                        <field name="project_name" required="True"/>
+                    </group>
+                    <group>
+                        <field name="project" domain="[('is_template','=',True)]" required="True"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="create_project" string="Create" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

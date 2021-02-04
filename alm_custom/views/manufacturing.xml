@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_mrp_form_inherit" model="ir.ui.view">
+        <field name="name">mrp.form.view.inherit</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form//field[@name='user_id']" position="after">
+                <field name="project"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_mrp_workorder_tree_inherit" model="ir.ui.view">
+        <field name="name">mrp.workorder.tree.view.inherit</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="/tree//field[@name='workcenter_id']" position="after">
+                <field name="project_id" invisible="1"/>
+                <field name="project_id" invisible="1"/>
+                <field name="project_task" domain="[('project_id','=',parent.project)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_mrp_workorder_form_inherit" model="ir.ui.view">
+        <field name="name">mrp.workorder.form.view.inherit</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/group" position="inside">
+                <group>
+                    <field name="project_id" invisible="1"/>
+                    <field name="tasks_domain" invisible="1"/>
+                    <field name="project_task" domain="[('project_id','=',parent.project)]"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+
+
+    <record id="mrp_workcenter_view_inherit" model="ir.ui.view">
+        <field name="name">mrp.workcenter.form.view.inherit</field>
+        <field name="model">mrp.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet//field[@name='alternative_workcenter_ids']" position="after">
+                <field name="is_subcontracted"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
