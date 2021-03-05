@@ -47,8 +47,16 @@
         <field name="model">project.task</field>
         <field name="inherit_id" ref="project.view_task_form2"/>
         <field name="arch" type="xml">
+            <xpath expr="/form/sheet//field[@name='partner_phone']" position="after">
+                <field name="actual_start"/>
+                <field name="actual_completion"/>
+            </xpath>
+            <xpath expr="/form/sheet//field[@name='tag_ids']" position="after">
+                <field name="planned_start"/>
+                <field name="planned_completion"/>
+            </xpath>
             <xpath expr="/form/sheet//field[@name='partner_id']" position="after">
-<!--                <field name="wo_status" invisible="1"/>-->
+                <!--                <field name="wo_status" invisible="1"/>-->
                 <field name="wo_domain" invisible="1"/>
                 <field name="mo_id" invisible="1"/>
                 <field name="work_order" domain="[('production_id.id','=',mo_id)]"/>

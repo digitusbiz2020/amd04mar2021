@@ -20,6 +20,10 @@ class ProjectTask(models.Model):
     responsibility = fields.Selection([('ppc','PPC'),('design','Design'),('manufacturing','Manufacturing')],"Responsibility")
     start_date = fields.Date("Date Start",default=fields.Datetime.now)
     inc_sequence = fields.Char()
+    planned_start = fields.Date("Planned Start Date")
+    planned_completion = fields.Date("Planned Completion Date")
+    actual_start = fields.Date("Actual Start Date")
+    actual_completion = fields.Date("Actual Completion Date")
 
     @api.model
     def create(self, vals):
