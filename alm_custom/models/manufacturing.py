@@ -12,6 +12,7 @@ class Manufacturing(models.Model):
         if self.project:
             self.project.manufacturing_order = self.id.origin
 
+
 class WorkOrders(models.Model):
     _inherit = 'mrp.workorder'
 
