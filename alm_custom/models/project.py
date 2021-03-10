@@ -20,10 +20,22 @@ class ProjectTask(models.Model):
     responsibility = fields.Selection([('ppc','PPC'),('design','Design'),('manufacturing','Manufacturing')],"Responsibility")
     start_date = fields.Date("Date Start",default=fields.Datetime.now)
     inc_sequence = fields.Char()
-    planned_start = fields.Datetime(related='work_order.date_planned_start', string="Planned Start Date")
-    planned_completion = fields.Datetime(related='work_order.date_planned_finished',string="Planned Completion Date")
-    actual_start = fields.Datetime(related='work_order.date_start',string="Actual Start Date")
-    actual_completion = fields.Datetime(related='work_order.date_finished',string="Actual Completion Date")
+    planned_start = fields.Datetime(string="Planned Start Date")
+    planned_completion = fields.Datetime(string="Planned Completion Date")
+    actual_start = fields.Datetime(string="Actual Start Date")
+    actual_completion = fields.Datetime(string="Actual Completion Date")
+    set_date = fields.Boolean(compute='set_dates')
+
+    @api.depends('work_order')
+    def set_dates(self):
+        if self.work_order:
+            self.planned_start = self.work_order.date_planned_start
+            self.planned_completion = self.work_order.date_planned_finished
+            self.actual_start = self.work_order.date_start
+            self.actual_completion = self.work_order.date_finished
+            self.set_date=True
+        else:
+            self.set_date=False
 
     @api.model
     def create(self, vals):

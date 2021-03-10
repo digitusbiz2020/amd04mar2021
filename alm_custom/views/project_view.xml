@@ -50,6 +50,7 @@
             <xpath expr="/form/sheet//field[@name='partner_phone']" position="after">
                 <field name="actual_start"/>
                 <field name="actual_completion"/>
+                <field name="set_date" invisible="1"/>
             </xpath>
             <xpath expr="/form/sheet//field[@name='tag_ids']" position="after">
                 <field name="planned_start"/>
